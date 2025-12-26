@@ -10,7 +10,6 @@ import Details from "./components/product-details";
 import ProtectedRoute from "./components/protectecRoutes";
 import TheSignin from "./pages/signin";
 import useNetworkStatus from "./utilis/network-checking";
-import Spinner from "./components/spinner.component";
 
 function OfflineBanner() {
   const { isOffline } = useNetworkStatus();
@@ -54,7 +53,6 @@ function App() {
           <Route path="product/:name" element={<Details />} />
           <Route path="signin/*" element={<TheSignin />} />
         </Route>
-        <Route path="spinner" element={<Spinner />} />
       </Routes>
       <OfflineBanner />
     </>

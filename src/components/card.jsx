@@ -18,7 +18,7 @@ const Card = ({ product }) => {
       setShowPopup(true);
       setTimeout(() => setShowPopup(false), 2000);
     } else {
-      navigate("/signin");
+      navigate("signin");
     }
   };
 

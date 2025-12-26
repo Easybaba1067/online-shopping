@@ -7,11 +7,12 @@ function Popup({ message, show, color }) {
         position: "fixed",
         top: "30px",
         right: "50px",
-        zIndex: "2",
+        zIndex: 9999,
         background: color,
         color: "white",
         padding: "10px 20px",
         borderRadius: "5px",
+        pointerEvents: "none",
       }}
     >
       {message}

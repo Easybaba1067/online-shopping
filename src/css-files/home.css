@@ -121,6 +121,7 @@
   }
 }
 .featured-container {
+  overflow-x: auto;
   a {
     text-decoration: none;
     display: flex;

@@ -91,7 +91,10 @@
   }
   .product-details {
     .details-flex {
-      width: 90% !important;
+      width: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
     .product-description {
       width: 90% !important;

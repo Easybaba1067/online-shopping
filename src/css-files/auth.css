@@ -2,7 +2,6 @@
   height: 100vh;
   width: 100vw;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -137,5 +136,37 @@
     p {
       color: #fff;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-container {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 1rem;
+  }
+
+  .welcome-content,
+  .welcome-form {
+    width: 100%;
+    margin: 0;
+  }
+
+  .form {
+    width: 100%;
+    max-width: 90%;
+  }
+
+  .platform-login {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  input,
+  button {
+    width: 100%;
   }
 }

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "../css-files/auth.css";
-
 import { useMediaQuery } from "react-responsive";
 import SocialMedia from "./platform-login.component";
 import { registerWithEmail, loginWithEmail } from "../utilis/auth";
@@ -86,6 +85,7 @@ const Signin = () => {
             <SocialMedia />
           </div>
         )}
+
         <div className="welcome-form">
           <div className="form">
             {existingUser ? (
@@ -96,6 +96,7 @@ const Signin = () => {
                   <label htmlFor="email">Email</label>
                   <input
                     type="email"
+                    name="email"
                     placeholder="jondoe@email.com"
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -105,6 +106,7 @@ const Signin = () => {
                   <label htmlFor="password">Password</label>
                   <input
                     type={showPassword ? "text" : "password"}
+                    name="password"
                     placeholder="password"
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -114,7 +116,7 @@ const Signin = () => {
                     style={{
                       position: "absolute",
                       right: "20px",
-                      top: "65%",
+                      top: "70%",
                       transform: "translateY(-50%)",
                       cursor: "pointer",
                     }}
@@ -143,6 +145,7 @@ const Signin = () => {
                   <label htmlFor="name">Name</label>
                   <input
                     type="text"
+                    name="full name"
                     placeholder="Full name"
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -152,6 +155,7 @@ const Signin = () => {
                   <label htmlFor="email">Email</label>
                   <input
                     type="email"
+                    name="email"
                     placeholder="jondoe@email.com"
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -162,6 +166,7 @@ const Signin = () => {
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="password"
+                    name="password"
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
@@ -183,6 +188,7 @@ const Signin = () => {
                   <label htmlFor="confirm name">Confirm password</label>
                   <input
                     type="password"
+                    name="comfirm password"
                     placeholder="confrim password"
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required

@@ -65,7 +65,7 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <p className="footer-text">
-            © {new Date().getFullYear()} MyShop. All rights reserved.
+            © {new Date().getFullYear()} Easyb store. All rights reserved.
           </p>
         </div>
       </footer>
