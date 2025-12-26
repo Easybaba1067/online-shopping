@@ -1,0 +1,141 @@
+.auth-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(120deg, #2b2dff 50%, #fff 50%);
+}
+.welcome-content {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  h1 {
+    color: #fff;
+    padding: 5px;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+  }
+  p {
+    margin-bottom: 10px;
+    width: 80%;
+    color: #fff;
+  }
+}
+.platform-login {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+  gap: 1rem;
+  margin: auto;
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 5px;
+    background: #fff;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+.welcome-form {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  .form {
+    width: 300px;
+    padding: 1rem;
+    border: #2b2dff solid 1px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8),
+      -2px -2px 5px rgba(255, 255, 255, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    h1,
+    p {
+      text-align: center;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #2b2dff;
+      border: #fff solid 1px;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+  div {
+    padding: 10px;
+    input {
+      padding: 10px 15px;
+      border-radius: 8px;
+      border: #2b2dff solid 1px;
+      &:focus {
+        outline: none;
+      }
+    }
+    .error-message {
+      color: red;
+      text-align: center;
+      width: 200px;
+    }
+    .hide {
+      display: none;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  }
+  .forget-me {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    a {
+      text-decoration: none;
+    }
+  }
+  button {
+    background: transparent;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+  }
+  button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+.set-password {
+  height: 100vh;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .welcome-form {
+    h1,
+    p {
+      color: #fff;
+    }
+  }
+}
