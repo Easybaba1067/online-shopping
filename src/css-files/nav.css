@@ -176,7 +176,6 @@
     transform: translateX(0);
   }
   .nav-settings-container {
-    padding: 0 10px;
     background-color: transparent;
   }
   .nav-settings-flex {
@@ -237,7 +236,7 @@
     overflow: hidden;
     background-color: #221e22d0;
     z-index: 2;
-    transform: translateX(-800px);
+    transform: translateX(-1000px);
     transition: transform 0.3s ease-in;
   }
 
