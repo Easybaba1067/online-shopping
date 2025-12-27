@@ -1,4 +1,5 @@
 import FrontCard from "./front-card";
+import "../css-files/home.css";
 const CategoryShop = ({ title, datas }) => {
   return (
     <>

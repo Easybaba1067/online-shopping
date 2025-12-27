@@ -176,4 +176,17 @@
   .view-paragraph {
     padding: 10px;
   }
+  .featured-container {
+    h1 {
+      font-size: 1rem;
+      padding: 0 5px;
+      white-space: nowrap;
+    }
+  }
+  .display-card {
+    h3 {
+      white-space: nowrap;
+      font-size: 2rem;
+    }
+  }
 }

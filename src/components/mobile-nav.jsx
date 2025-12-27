@@ -55,7 +55,6 @@ const MobileNav = () => {
         <NavSettings />
         <Nav />
       </div>
-
       <div
         onClick={() => setIsActive(false)}
         className={isActive ? "overlay active" : "overlay"}
