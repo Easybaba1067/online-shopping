@@ -153,7 +153,6 @@
   }
 
   .mobile-navigation.active {
-    overflow: auto;
     transform: translateX(0);
   }
   body.no-scroll {
@@ -184,7 +183,7 @@
     flex-direction: column;
     a {
       white-space: nowrap;
-      padding: 5px 10px;
+      padding: 10px;
       margin: 10px;
       background-color: #2b2fff25;
       border-radius: 20px;
