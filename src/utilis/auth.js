@@ -2,7 +2,7 @@ import { auth, db } from "./firbase-utils";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import {
   GoogleAuthProvider,
-  signInWithPopup,
+  signInWithRedirect,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
@@ -14,7 +14,7 @@ const googleProvider = new GoogleAuthProvider();
 
 export const signInWithGoogle = async () => {
   try {
-    const result = await signInWithPopup(auth, googleProvider);
+    const result = await signInWithRedirect(auth, googleProvider);
     const user = result.user;
     const userRef = doc(db, "users", user.uid);
     const userDocSnap = await getDoc(userRef);
