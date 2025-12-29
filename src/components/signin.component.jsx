@@ -33,7 +33,7 @@ const Signin = () => {
         return;
       case !isStrongPassword(password):
         setpasswordStrength(
-          "format: 8 characters, uppercase, lowercase, number, and symbol."
+          "format:8 characters, uppercase, lowercase, number, and symbol."
         );
         return;
 

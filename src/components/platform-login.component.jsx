@@ -1,9 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "../css-files/auth.css";
 import { signInWithGoogle } from "../utilis/auth";
-import { useState } from "react";
+
 import getAuthErrorMessage from "../utilis/error-message";
 import Popup from "./popupMessage";
+import { useNavigate } from "react-router-dom";
+
 const SocialMedia = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -24,6 +26,7 @@ const SocialMedia = () => {
       setTimeout(() => setMessage(false), 2000);
     }
   };
+
   return (
     <>
       <div className="platform-login">
