@@ -62,7 +62,8 @@
     width: 300px;
     padding: 1rem;
     border: #2b2dff solid 1px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8),
+    box-shadow:
+      2px 2px 5px rgba(0, 0, 0, 0.8),
       -2px -2px 5px rgba(255, 255, 255, 0.6);
     display: flex;
     flex-direction: column;
@@ -72,6 +73,9 @@
     h1,
     p {
       text-align: center;
+    }
+    span {
+      color: red;
     }
     button {
       width: 100%;
@@ -93,11 +97,7 @@
         outline: none;
       }
     }
-    .error-message {
-      color: red;
-      text-align: center;
-      width: 200px;
-    }
+
     .hide {
       display: none;
     }
@@ -144,7 +144,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-
     padding: 1rem;
   }
 
@@ -168,5 +167,8 @@
   input,
   button {
     width: 100%;
+  }
+  label {
+    color: #fff;
   }
 }

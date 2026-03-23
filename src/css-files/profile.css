@@ -28,6 +28,10 @@
   padding: 10px;
   margin: 10px 0px;
   width: 50%;
+  h3 {
+    color: #2b2dff;
+    text-align: center;
+  }
 }
 .tiles-flex {
   color: #2b2dff;

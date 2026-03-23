@@ -3,7 +3,6 @@ import "../css-files/auth.css";
 import { useMediaQuery } from "react-responsive";
 import SocialMedia from "./platform-login.component";
 import { registerWithEmail, loginWithEmail } from "../utilis/auth";
-import { Eye, EyeSlash } from "react-bootstrap-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import Popup from "./popupMessage";
 import getAuthErrorMessage from "../utilis/error-message";
@@ -11,7 +10,6 @@ import getAuthErrorMessage from "../utilis/error-message";
 const Signin = () => {
   const [existingUser, setExistingUser] = useState(true);
   const isMobile = useMediaQuery({ maxWidth: 768 });
-  const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +31,7 @@ const Signin = () => {
         return;
       case !isStrongPassword(password):
         setpasswordStrength(
-          "format:8 characters, uppercase, lowercase, number, and symbol."
+          "minimum of 8 characters, uppercase, lowercase, number, and symbol.",
         );
         return;
 
@@ -105,25 +103,14 @@ const Signin = () => {
                 <div style={{ position: "relative" }}>
                   <label htmlFor="password">Password</label>
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type={"password"}
                     name="password"
                     placeholder="password"
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                  <span
-                    onClick={() => setShowPassword(!showPassword)}
-                    style={{
-                      position: "absolute",
-                      right: "20px",
-                      top: "70%",
-                      transform: "translateY(-50%)",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {showPassword ? <EyeSlash /> : <Eye />}
-                  </span>
                 </div>
+
                 <Popup
                   message={loginMessage}
                   show={loginMessage}
@@ -149,6 +136,7 @@ const Signin = () => {
                     placeholder="Full name"
                     onChange={(e) => setName(e.target.value)}
                     required
+                    pattern="^[A-Za-z]+ [A-Za-z]+$"
                   />
                 </div>
                 <div>
@@ -164,26 +152,14 @@ const Signin = () => {
                 <div style={{ position: "relative" }}>
                   <label htmlFor="password">Password</label>
                   <input
-                    type={showPassword ? "text" : "password"}
+                    type={"password"}
                     placeholder="password"
                     name="password"
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                  <span
-                    onClick={() => setShowPassword(!showPassword)}
-                    style={{
-                      position: "absolute",
-                      right: "20px",
-                      top: "70%",
-                      transform: "translateY(-50%)",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {showPassword ? <EyeSlash /> : <Eye />}
-                  </span>
                 </div>
-                <p className="error-message">{passwordStrength}</p>
+                <span className="error-message">{passwordStrength}</span>
                 <div>
                   <label htmlFor="confirm name">Confirm password</label>
                   <input
