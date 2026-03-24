@@ -1,5 +1,5 @@
 import "../css-files/home.css";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useCart } from "../providers/cartContext";
 import Popup from "./popupMessage";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,31 @@ const Card = ({ product }) => {
   const [showPopup, setShowPopup] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
+
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    const currentRef = cardRef.current; // 👈 capture the ref value once
+
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) observer.unobserve(currentRef); // 👈 use captured value
+    };
+  }, []);
 
   const handleAddToCart = () => {
     if (user) {
@@ -24,7 +49,10 @@ const Card = ({ product }) => {
 
   return (
     <>
-      <div className="card-container">
+      <div
+        ref={cardRef}
+        className={`card-container ${isVisible ? "slide-in" : ""}`}
+      >
         <div
           className="liks"
           onClick={() => {

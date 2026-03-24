@@ -9,7 +9,7 @@ function getAuthErrorMessage(code) {
     case "auth/email-already-in-use":
       return "This email is already registered.";
     case "auth/weak-password":
-      return "Password should be at least 6 characters.";
+      return "Select a stronger password.";
     case "auth/network-request-failed":
       return "Network error. Please check your connection.";
     case "auth/too-many-requests":
@@ -34,6 +34,8 @@ function getAuthErrorMessage(code) {
       return "This credential is already linked to another account.";
     case "auth/user-disabled":
       return "This account has been disabled. Contact support.";
+    case "auth/invalid-password":
+      return "Select a stronger password.";
     default:
       return "Something went wrong. Please try again.";
   }

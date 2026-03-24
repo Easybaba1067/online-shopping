@@ -2,8 +2,10 @@ import "../css-files/spinner.css";
 
 const SmallSpinner = () => {
   return (
-    <div className="spinner-box">
-      <div className="spinner"></div>
+    <div className="dots-box">
+      <div className="dot"></div>
+      <div className="dot"></div>
+      <div className="dot"></div>
     </div>
   );
 };

@@ -7,6 +7,9 @@ import {
   signOut,
   EmailAuthProvider,
   linkWithCredential,
+  // signInWithPopup,
+  signInWithRedirect,
+  // getRedirectResult,
   signInWithPopup,
 } from "firebase/auth";
 
@@ -15,29 +18,62 @@ googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
+const isMobileOrTablet = () =>
+  /Mobi|Android|iPad|iPhone/i.test(navigator.userAgent);
 export const signInWithGoogle = async () => {
   try {
-    const result = await signInWithPopup(auth, googleProvider);
-    const user = result.user;
-    const userRef = doc(db, "users", user.uid);
-    const userDocSnap = await getDoc(userRef);
-    if (userDocSnap.exists()) {
-      return { user, isNew: false };
+    if (isMobileOrTablet()) {
+      // Mobile/tablet → use redirect
+      await signInWithRedirect(auth, googleProvider);
     } else {
-      await setDoc(userRef, {
-        name: user.displayName,
-        email: user.email,
-        createdAt: new Date(),
-        cartItems: [],
-        wishlist: [],
-      });
-      return { user, isNew: true };
+      // Desktop → use popup
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      const userRef = doc(db, "users", user.uid);
+      const userDocSnap = await getDoc(userRef);
+
+      if (userDocSnap.exists()) {
+        return { user, isNew: false };
+      } else {
+        await setDoc(userRef, {
+          name: user.displayName,
+          email: user.email,
+          createdAt: new Date(),
+          cartItems: [],
+          wishlist: [],
+        });
+        return { user, isNew: true };
+      }
     }
   } catch (error) {
     console.error("Google sign-in error:", error.message);
     throw error;
   }
 };
+
+// export const signInWithGoogle = async () => {
+//   try {
+//     const result = await signInWithPopup(auth, googleProvider);
+//     const user = result.user;
+//     const userRef = doc(db, "users", user.uid);
+//     const userDocSnap = await getDoc(userRef);
+//     if (userDocSnap.exists()) {
+//       return { user, isNew: false };
+//     } else {
+//       await setDoc(userRef, {
+//         name: user.displayName,
+//         email: user.email,
+//         createdAt: new Date(),
+//         cartItems: [],
+//         wishlist: [],
+//       });
+//       return { user, isNew: true };
+//     }
+//   } catch (error) {
+//     console.error("Google sign-in error:", error.message);
+//     throw error;
+//   }
+// };
 
 export const registerWithEmail = async (name, email, password) => {
   try {
@@ -52,7 +88,7 @@ export const registerWithEmail = async (name, email, password) => {
         cartItems: [],
         wishlist: [],
       },
-      { merge: true }
+      { merge: true },
     );
     return user;
   } catch (error) {
@@ -67,6 +103,7 @@ export const loginWithEmail = async (email, password) => {
     return result.user;
   } catch (error) {
     console.error("Email login error:", error.message);
+    console.log("Auth error message:", error.message);
     throw error;
   }
 };
@@ -86,7 +123,7 @@ export const linkEmailToGoogleAccount = async (password) => {
     if (!currentUser) throw new Error("No user is currently signed in.");
     const credential = EmailAuthProvider.credential(
       currentUser.email,
-      password
+      password,
     );
     const result = await linkWithCredential(currentUser, credential);
     return result.user;

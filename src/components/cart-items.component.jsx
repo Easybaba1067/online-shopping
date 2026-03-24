@@ -1,14 +1,43 @@
 import { Trash3Fill } from "react-bootstrap-icons";
 import "../css-files/cart.css";
 import { useCart } from "../providers/cartContext";
+import { useState, useEffect, useRef } from "react";
 
 const CardItem = ({ item }) => {
   const { price, name, imageUrl } = item;
   const { removeFromCart } = useCart();
 
+  const [isVisible, setIsVisible] = useState(false);
+  const itemRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    const currentRef = itemRef.current;
+
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) observer.unobserve(currentRef);
+    };
+  }, []);
+
   return (
     <>
-      <div className="item-container">
+      <div
+        ref={itemRef}
+        className={`item-container ${isVisible ? "slide-in" : ""}`}
+      >
         <div className="item-flex">
           <img src={imageUrl} alt={name} />
           <div className="details">

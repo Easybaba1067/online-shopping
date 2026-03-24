@@ -79,7 +79,7 @@ const Details = () => {
           qui illo nihil! Soluta, similique iure? Quasi, itaque ea?
         </div>
         <button onClick={handleAddToCart}>Add to cart</button>
-        <Popup message="Added to cart!" show={showPopup} />
+        <Popup message="Added to cart!" show={showPopup} color={"green"} />
       </div>
     </>
   );

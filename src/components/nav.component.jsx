@@ -1,11 +1,10 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-// import { Cart } from "react-bootstrap-icons";
-// import { useState } from "react";
+
 import "../css-files/nav.css";
 import { useCart } from "../providers/cartContext";
 import { useAuth } from "../providers/userContext";
 
-import { Cart, Person, PersonCheck } from "react-bootstrap-icons";
+import { Cart, Person, PersonCircle } from "react-bootstrap-icons";
 const Nav = () => {
   const location = useLocation();
   const { cartItems } = useCart();
@@ -39,11 +38,22 @@ const Nav = () => {
           <li onClick={() => navigate("/profile")}>
             {user ? (
               <p>
-                <PersonCheck />
+                <PersonCircle
+                  style={{
+                    marginRight: "2px",
+                    color: "#2b2dff",
+                    fontSize: "1.2rem",
+                  }}
+                />
               </p>
             ) : (
               <Link to={"signin"}>
-                <Person style={{ marginRight: "2px" }} />
+                <Person
+                  style={{
+                    marginRight: "2px",
+                    color: "#2b2dff",
+                  }}
+                />
                 Sign in
               </Link>
             )}

@@ -34,7 +34,6 @@ const Signin = () => {
           "minimum of 8 characters, uppercase, lowercase, number, and symbol.",
         );
         return;
-
       default:
         try {
           setLoading(true);

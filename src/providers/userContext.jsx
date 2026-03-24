@@ -3,13 +3,13 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../utilis/firbase-utils";
 import "../css-files/shop.css";
+import FullSpinner from "../components/spinner.component";
 import {
   loginWithEmail,
   registerWithEmail,
   signInWithGoogle,
   logout,
 } from "../utilis/auth";
-import Spinner from "../components/spinner.component";
 
 const AuthContext = createContext({
   user: null,
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {loading ? <Spinner /> : children}
+      {loading ? <FullSpinner /> : children}
     </AuthContext.Provider>
   );
 };

@@ -19,42 +19,42 @@ const NavSettings = () => {
         <div className="nav-settings-flex">
           <Link to={"/"}>
             <span>
-              <House style={{ paddingTop: "5px", fontSize: "1.2rem" }} />
+              <House style={{ marginRight: "5px", fontSize: "1.1rem" }} />
             </span>
-            Home
+            <span className="settings-text">Home</span>
           </Link>
           {user && (
             <Link to={"/profile"}>
               <span>
-                <Person style={{ paddingTop: "5px", fontSize: "1.2rem" }} />
+                <Person style={{ marginRight: "5px", fontSize: "1.1rem" }} />
               </span>
-              Profile
+              <span className="settings-text">Profile</span>
             </Link>
           )}
           <Link>
             <span>
-              <Wallet style={{ paddingTop: "5px", fontSize: "1.2rem" }} />
+              <Wallet style={{ marginRight: "5px", fontSize: "1.1rem" }} />
             </span>
-            Payment method
+            <span className="settings-text">Payment method</span>
           </Link>
           <Link>
             <span>
-              <Lock style={{ paddingTop: "5px", fontSize: "1.2rem" }} />
+              <Lock style={{ marginRight: "5px", fontSize: "1.1rem" }} />
             </span>
-            Privacy settings
+            <span className="settings-text">Privacy settings</span>
           </Link>
           <Link to={"wishlist"}>
             <span>
-              <Heart style={{ paddingTop: "5px", fontSize: "1.2rem" }} />
+              <Heart style={{ marginRight: "5px", fontSize: "1.1rem" }} />
             </span>
-            Wishlist
+            <span className="settings-text">Wishlist</span>
           </Link>
           {user && (
             <Link to={"order"}>
               <span>
-                <Box2 style={{ paddingTop: "5px", fontSize: "1.2rem" }} />
+                <Box2 style={{ marginRight: "5px", fontSize: "1.1rem" }} />
               </span>
-              Order(s)
+              <span className="settings-text">Order(s)</span>
             </Link>
           )}
         </div>
