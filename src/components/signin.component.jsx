@@ -3,7 +3,7 @@ import "../css-files/auth.css";
 import { useMediaQuery } from "react-responsive";
 import SocialMedia from "./platform-login.component";
 import { registerWithEmail, loginWithEmail } from "../utilis/auth";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Popup from "./popupMessage";
 import getAuthErrorMessage from "../utilis/error-message";
 
@@ -20,8 +20,6 @@ const Signin = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -39,7 +37,7 @@ const Signin = () => {
           setLoading(true);
           await registerWithEmail(name, email, password);
 
-          navigate(from, { replace: true });
+          navigate("/", { replace: true });
         } catch (error) {
           setLoading(false);
           setMessage(getAuthErrorMessage(error.code));
@@ -53,7 +51,7 @@ const Signin = () => {
     try {
       setLoading(true);
       await loginWithEmail(email, password);
-      navigate(from, { replace: true });
+      navigate("/", { replace: true });
     } catch (error) {
       setLoading(false);
       setloginMessage(getAuthErrorMessage(error.code));

@@ -188,17 +188,15 @@
   }
   .nav-settings-container {
     background-color: transparent;
-    padding: 10px;
   }
   .nav-settings-flex {
     flex-direction: column;
-
     a {
       white-space: nowrap;
       padding: 10px;
       background-color: #2b2fff25;
       border-radius: 20px;
-      font-size: 1.1rem;
+      font-size: 0.9rem;
     }
   }
   .nav-list {

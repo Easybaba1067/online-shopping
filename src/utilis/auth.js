@@ -7,43 +7,29 @@ import {
   signOut,
   EmailAuthProvider,
   linkWithCredential,
-  // signInWithPopup,
   signInWithRedirect,
-  // getRedirectResult,
+  getRedirectResult,
   signInWithPopup,
 } from "firebase/auth";
 
+// Configure Google provider
 const googleProvider = new GoogleAuthProvider();
-googleProvider.setCustomParameters({
-  prompt: "select_account",
-});
+googleProvider.setCustomParameters({ prompt: "select_account" });
 
+// Detect mobile/tablet
 const isMobileOrTablet = () =>
   /Mobi|Android|iPad|iPhone/i.test(navigator.userAgent);
+
+// --- Google Sign-In ---
 export const signInWithGoogle = async () => {
   try {
     if (isMobileOrTablet()) {
-      // Mobile/tablet → use redirect
+      // Mobile/tablet → redirect flow
       await signInWithRedirect(auth, googleProvider);
     } else {
-      // Desktop → use popup
+      // Desktop → popup flow
       const result = await signInWithPopup(auth, googleProvider);
-      const user = result.user;
-      const userRef = doc(db, "users", user.uid);
-      const userDocSnap = await getDoc(userRef);
-
-      if (userDocSnap.exists()) {
-        return { user, isNew: false };
-      } else {
-        await setDoc(userRef, {
-          name: user.displayName,
-          email: user.email,
-          createdAt: new Date(),
-          cartItems: [],
-          wishlist: [],
-        });
-        return { user, isNew: true };
-      }
+      return await handleUser(result.user);
     }
   } catch (error) {
     console.error("Google sign-in error:", error.message);
@@ -51,30 +37,39 @@ export const signInWithGoogle = async () => {
   }
 };
 
-// export const signInWithGoogle = async () => {
-//   try {
-//     const result = await signInWithPopup(auth, googleProvider);
-//     const user = result.user;
-//     const userRef = doc(db, "users", user.uid);
-//     const userDocSnap = await getDoc(userRef);
-//     if (userDocSnap.exists()) {
-//       return { user, isNew: false };
-//     } else {
-//       await setDoc(userRef, {
-//         name: user.displayName,
-//         email: user.email,
-//         createdAt: new Date(),
-//         cartItems: [],
-//         wishlist: [],
-//       });
-//       return { user, isNew: true };
-//     }
-//   } catch (error) {
-//     console.error("Google sign-in error:", error.message);
-//     throw error;
-//   }
-// };
+// Complete redirect flow (call this on app load)
+export const completeGoogleRedirect = async () => {
+  try {
+    const result = await getRedirectResult(auth);
+    if (result?.user) {
+      return await handleUser(result.user);
+    }
+  } catch (error) {
+    console.error("Redirect completion error:", error.message);
+    throw error;
+  }
+};
 
+// Helper to create or fetch user doc
+const handleUser = async (user) => {
+  const userRef = doc(db, "users", user.uid);
+  const userDocSnap = await getDoc(userRef);
+
+  if (userDocSnap.exists()) {
+    return { user, isNew: false };
+  } else {
+    await setDoc(userRef, {
+      name: user.displayName,
+      email: user.email,
+      createdAt: new Date(),
+      cartItems: [],
+      wishlist: [],
+    });
+    return { user, isNew: true };
+  }
+};
+
+// --- Email Sign-Up ---
 export const registerWithEmail = async (name, email, password) => {
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -97,17 +92,18 @@ export const registerWithEmail = async (name, email, password) => {
   }
 };
 
+// --- Email Login ---
 export const loginWithEmail = async (email, password) => {
   try {
     const result = await signInWithEmailAndPassword(auth, email, password);
     return result.user;
   } catch (error) {
     console.error("Email login error:", error.message);
-    console.log("Auth error message:", error.message);
     throw error;
   }
 };
 
+// --- Logout ---
 export const logout = async () => {
   try {
     await signOut(auth);
@@ -117,6 +113,7 @@ export const logout = async () => {
   }
 };
 
+// --- Link Email to Google Account ---
 export const linkEmailToGoogleAccount = async (password) => {
   try {
     const currentUser = auth.currentUser;

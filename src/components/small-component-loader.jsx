@@ -1,13 +1,17 @@
 import "../css-files/spinner.css";
 
-const SmallSpinner = () => {
+const Spinner = () => {
   return (
-    <div className="dots-box">
-      <div className="dot"></div>
-      <div className="dot"></div>
-      <div className="dot"></div>
+    <div className="small-spinner-container">
+      <div className="wave-loader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
   );
 };
 
-export default SmallSpinner;
+export default Spinner;

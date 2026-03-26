@@ -1,13 +1,17 @@
 import "../css-files/spinner.css";
 
-const FullSpinner = () => {
+const Spinner = () => {
   return (
-    <div className="dots-container">
-      <div className="dot"></div>
-      <div className="dot"></div>
-      <div className="dot"></div>
+    <div className="spinner-container">
+      <div className="wave-loader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
   );
 };
 
-export default FullSpinner;
+export default Spinner;

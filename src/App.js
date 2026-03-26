@@ -10,10 +10,24 @@ import Details from "./components/product-details";
 import ProtectedRoute from "./components/protectecRoutes";
 import TheSignin from "./pages/signin";
 import useNetworkStatus from "./utilis/network-checking";
+import { completeGoogleRedirect } from "./utilis/auth";
+import { useEffect } from "react";
 
 function OfflineBanner() {
+  useEffect(() => {
+    // Run once on app load to complete Google redirect flow
+    const finalizeRedirect = async () => {
+      const result = await completeGoogleRedirect();
+      if (result?.user) {
+        console.log("Google redirect sign-in complete:", result.user);
+        // You can also dispatch to Redux or Context here
+      }
+    };
+    finalizeRedirect();
+  }, []);
   const { isOffline } = useNetworkStatus();
   if (!isOffline) return null;
+
   return (
     <div
       style={{
